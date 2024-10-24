@@ -23,7 +23,7 @@ async def ping(client, message):
         disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
 
         response = f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>"
-     await message.reply(response)
+        await message.reply(response)  # Corrected indentation
 
         stats_message = (
             f"System Stats\n"
