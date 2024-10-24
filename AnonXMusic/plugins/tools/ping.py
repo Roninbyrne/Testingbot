@@ -22,7 +22,8 @@ async def ping(client, message):
         disk = psutil.disk_usage('/')
         disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
 
-        response = f"{client.mention} is pinging...<a href='{PING_IMG_URL}'>.</a>"
+        response = f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>Ping Image</a>"
+        await message.reply(response)
 
         stats_message = (
             f"System Stats\n"
@@ -32,8 +33,7 @@ async def ping(client, message):
             f"Disk Usage: {disk_usage}\n"
         )
 
-        await message.reply(response)
-        await message.reply_photo(photo=PING_IMG_URL, caption=stats_message)
+        await message.reply_caption(stats_message)
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")
