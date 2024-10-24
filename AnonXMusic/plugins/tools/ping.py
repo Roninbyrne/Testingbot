@@ -6,7 +6,7 @@ import logging
 from AnonXMusic import app
 from config import PING_IMG_URL
 
-@app.on_message(filters.command(["ping", "alive"], prefixes=".") & filters.me)
+@app.on_message(filters.command(["ping", "alive"]))
 async def ping(client, message):
     try:
         uptime_seconds = time.time() - bot_start_time
