@@ -6,10 +6,10 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, Message
 from youtubesearchpython.__future__ import VideosSearch
 
 import config
-from ComboBot import app
-from ComboBot.misc import _boot_
-from ComboBot.plugins.sudo.sudoers import sudoers_list
-from ComboBot.utils.database import (
+from AnonXMusic import app
+from AnonXMusic.misc import _boot_
+from AnonXMusic.plugins.sudo.sudoers import sudoers_list
+from AnonXMusic.utils.database import (
     add_served_chat,
     add_served_user,
     blacklisted_chats,
@@ -17,9 +17,9 @@ from ComboBot.utils.database import (
     is_banned_user,
     is_on_off,
 )
-from ComboBot.utils.decorators.language import LanguageStart
-from ComboBot.utils.formatters import get_readable_time
-from ComboBot.utils.inline import help_pannel, private_panel, start_panel
+from AnonXMusic.utils.decorators.language import LanguageStart
+from AnonXMusic.utils.formatters import get_readable_time
+from AnonXMusic.utils.inline import help_pannel, private_panel, start_panel
 from config import BANNED_USERS
 from strings import get_string
 
@@ -82,15 +82,20 @@ async def start_pm(client, message: Message, _):
                     text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ ᴛᴏ ᴄʜᴇᴄᴋ <b>ᴛʀᴀᴄᴋ ɪɴғᴏʀᴍᴀᴛɪᴏɴ</b>.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
                 )
     else:
-        out = private_panel(_)
-        await message.reply(f" нєу {message.from_user.first_name} <a href='{config.START_VIDEO}'>🌀</a>")
-        await message.reply(f"<b>๏ 𝙷𝚎𝚢 𝚝𝚑𝚎𝚛𝚎! 𝙸'𝚖 {app.mention} 𝙱𝚘𝚝! \n๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴍᴜꜱɪᴄ ʙᴏᴛ ꜰᴏʀ ᴘʟᴀʏɪɴɢ ꜱᴏɴɢꜱ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ.\n๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs</b>", reply_markup=InlineKeyboardMarkup(out))
+    out = private_panel(_)
+    message_text = (
+        f" нєу {message.from_user.first_name} \n"
+        f"<b>๏ нєу {app.mention} 𝙱𝚘𝚝! \n"
+        f"๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴍᴜꜱɪᴄ ʙᴏᴛ ꜰᴏʀ ᴘʟᴀʏɪɴɢ ꜱᴏɴɢꜱ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ.\n"
+        f"๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs</b>"
+    )
+    await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'>Start Video</a>", reply_markup=InlineKeyboardMarkup(out))
 
-        if await is_on_off(2):
-            return await app.send_message(
-                chat_id=config.LOGGER_ID,
-                text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
-            )
+    if await is_on_off(2):
+        return await app.send_message(
+            chat_id=config.LOGGER_ID,
+            text=f"{message.from_user.mention} ᴊᴜsᴛ sᴛᴀʀᴛᴇᴅ ᴛʜᴇ ʙᴏᴛ.\n\n<b>ᴜsᴇʀ ɪᴅ :</b> <code>{message.from_user.id}</code>\n<b>ᴜsᴇʀɴᴀᴍᴇ :</b> @{message.from_user.username}",
+        )
 
 
 @app.on_message(filters.command(["start"]) & filters.group & ~BANNED_USERS)
