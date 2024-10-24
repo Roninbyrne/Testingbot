@@ -84,12 +84,11 @@ async def start_pm(client, message: Message, _):
     else:
         out = private_panel(_)
         message_text = (
-            f" нєу {message.from_user.first_name} \n"
-            f"<b>๏ нєу {app.mention} 𝙱𝚘𝚝! \n"
+            f"<b>нєу {message.from_user.first_name} ɪᴍ{app.mention} 𝙱𝚘𝚝! \n"
             f"๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴍᴜꜱɪᴄ ʙᴏᴛ ꜰᴏʀ ᴘʟᴀʏɪɴɢ ꜱᴏɴɢꜱ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ.\n"
             f"๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs</b>"
         )
-        await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'>Start Video</a>", reply_markup=InlineKeyboardMarkup(out))
+        await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'> </a>", reply_markup=InlineKeyboardMarkup(out))
 
         if await is_on_off(2):
             return await app.send_message(
