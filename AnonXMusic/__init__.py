@@ -11,5 +11,4 @@ dbb()
 heroku()
 
 app = Anony()
-userbot = Userbot()
 
