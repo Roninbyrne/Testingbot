@@ -37,8 +37,6 @@ async def braodcast_message(client, message, _):
             query = query.replace("-nobot", "")
         if "-pinloud" in query:
             query = query.replace("-pinloud", "")
-        if "-assistant" in query:
-            query = query.replace("-assistant", "")
         if "-user" in query:
             query = query.replace("-user", "")
         if query == "":
@@ -109,40 +107,12 @@ async def braodcast_message(client, message, _):
                 await asyncio.sleep(flood_time)
             except:
                 pass
+
         try:
             await message.reply_text(_["broad_4"].format(susr))
         except:
             pass
 
-    if "-assistant" in message.text:
-        aw = await message.reply_text(_["broad_5"])
-        text = _["broad_6"]
-        from AnonXMusic.core.userbot import assistants
-
-        for num in assistants:
-            sent = 0
-            client = await get_client(num)
-            async for dialog in client.get_dialogs():
-                try:
-                    await client.forward_messages(
-                        dialog.chat.id, y, x
-                    ) if message.reply_to_message else await client.send_message(
-                        dialog.chat.id, text=query
-                    )
-                    sent += 1
-                    await asyncio.sleep(3)
-                except FloodWait as fw:
-                    flood_time = int(fw.value)
-                    if flood_time > 200:
-                        continue
-                    await asyncio.sleep(flood_time)
-                except:
-                    continue
-            text += _["broad_7"].format(num, sent)
-        try:
-            await aw.edit_text(text)
-        except:
-            pass
     IS_BROADCASTING = False
 
 
