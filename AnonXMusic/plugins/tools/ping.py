@@ -1,27 +1,43 @@
-from datetime import datetime
+from pyrogram import Client, filters
+import psutil
+import time
+from datetime import timedelta
+import logging
+from config import PING_IMG_URL
 
-from pyrogram import filters
-from pyrogram.types import Message
+@app.on_message(filters.command(["ping", "alive"], prefixes=".") & filters.me)
+async def ping(client, message):
+    try:
+        uptime_seconds = time.time() - bot_start_time
+        uptime = str(timedelta(seconds=int(uptime_seconds)))
 
-from AnonXMusic import app
-from AnonXMusic.utils import bot_sys_stats
-from AnonXMusic.utils.decorators.language import language
-from AnonXMusic.utils.inline import supp_markup
-from config import BANNED_USERS, PING_IMG_URL
+        ram = psutil.virtual_memory()
+        ram_usage = f"{ram.percent}% used ({ram.used / (1024 ** 3):.2f} GB of {ram.total / (1024 ** 3):.2f} GB)"
 
+        cpu_usage = f"{psutil.cpu_percent()}%"
 
-@app.on_message(filters.command(["ping", "alive"]) & ~BANNED_USERS)
-@language
-async def ping_com(client, message: Message, _):
-    start = datetime.now()
-    response = await message.reply_photo(
-        photo=PING_IMG_URL,
-        caption=_["ping_1"].format(app.mention),
-    )
-    pytgping = await Anony.ping()
-    UP, CPU, RAM, DISK = await bot_sys_stats()
-    resp = (datetime.now() - start).microseconds / 1000
-    await response.edit_text(
-        _["ping_2"].format(resp, app.mention, UP, RAM, CPU, DISK, pytgping),
-        reply_markup=supp_markup(_),
-    )
+        disk = psutil.disk_usage('/')
+        disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
+
+        response = f"{client.mention} is pinging...<a href='{PING_IMG_URL}'>.</a>"
+        reply = await message.reply(response)
+
+        stats_message = (
+            f"System Stats\n"
+            f"Uptime: {uptime}\n"
+            f"RAM Usage: {ram_usage}\n"
+            f"CPU Usage: {cpu_usage}\n"
+            f"Disk Usage: {disk_usage}\n"
+        )
+
+        await reply.edit_text(stats_message)
+
+        await message.reply_photo(
+            photo=PING_IMG_URL,
+            caption=stats_message
+        )
+
+    except Exception as e:
+        logging.error(f"An error occurred: {e}")
+        error_message = "An error occurred while retrieving system stats."
+        await message.edit_text(error_message)
