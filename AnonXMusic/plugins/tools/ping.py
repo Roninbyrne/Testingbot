@@ -6,6 +6,8 @@ import logging
 from AnonXMusic import app
 from config import PING_IMG_URL
 
+bot_start_time = time.time()
+
 @app.on_message(filters.command(["ping", "alive"]))
 async def ping(client, message):
     try:
@@ -21,7 +23,7 @@ async def ping(client, message):
         disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
 
         response = f"{client.mention} is pinging...<a href='{PING_IMG_URL}'>.</a>"
-        reply = await message.reply(response)
+        await message.reply(response)
 
         stats_message = (
             f"System Stats\n"
@@ -30,8 +32,6 @@ async def ping(client, message):
             f"CPU Usage: {cpu_usage}\n"
             f"Disk Usage: {disk_usage}\n"
         )
-
-        await message.reply(stats_message)  
 
         await message.reply_photo(
             photo=PING_IMG_URL,
