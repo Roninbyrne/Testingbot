@@ -85,7 +85,7 @@ async def start_pm(client, message: Message, _):
         out = private_panel(_)
         message_text = (
             f"<b>нєу {message.from_user.first_name} ɪᴍ{app.mention} 𝙱𝚘𝚝! \n"
-            f"๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴍᴜꜱɪᴄ ʙᴏᴛ ꜰᴏʀ ᴘʟᴀʏɪɴɢ ꜱᴏɴɢꜱ ɪɴ ᴠᴏɪᴄᴇ ᴄʜᴀᴛ.\n"
+            f"๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴄᴏɴᴛᴇɴᴛ ꜱᴀᴠɪɴɢ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ.\n"
             f"๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs</b>"
         )
         await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'> </a>", reply_markup=InlineKeyboardMarkup(out))
