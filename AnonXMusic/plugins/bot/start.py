@@ -89,7 +89,7 @@ async def start_pm(client, message: Message, _):
             f"๏ ᴀ ʟᴀᴛᴇꜱᴛ ᴄᴏɴᴛᴇɴᴛ ꜱᴀᴠɪɴɢ ʙᴏᴛ ꜰᴏʀ ʏᴏᴜ.\n"
             f"๏ ᴄʟɪᴄᴋ ᴏɴ ᴛʜᴇ ʙᴜᴛᴛᴏɴ ʙᴇʟᴏᴡ ᴛᴏ ɢᴇᴛ ɪɴғᴏʀᴍᴀᴛɪᴏɴ ᴀʙᴏᴜᴛ ᴍʏ ᴄᴏᴍᴍᴀɴᴅs</b>"
         )
-        await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'>๏ Lᴇᴛ's Bʀɪɴɢ Oʀᴅᴇʀ Tᴏ Yᴏᴜʀ Cʜᴀɴɴᴇʟ!. </a>", reply_markup=InlineKeyboardMarkup(out))
+        await message.reply(f"{message_text} \n<a href='{config.START_VIDEO}'> .</a>", reply_markup=InlineKeyboardMarkup(out))
 
         if await is_on_off(2):
             return await app.send_message(
