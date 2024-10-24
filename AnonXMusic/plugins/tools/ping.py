@@ -22,12 +22,12 @@ async def ping(client, message):
 
         # Merge the image and stats into one message
         stats_message = (
-            f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>\n\n"
-            f"System Stats\n"
-            f"Uptime: {uptime}\n"
-            f"RAM Usage: {ram_usage}\n"
-            f"CPU Usage: {cpu_usage}\n"
-            f"Disk Usage: {disk_usage}\n"
+            f"{client.mention} sʏsᴛᴇᴍ sᴛᴀᴛs : <a href='{PING_IMG_URL}'>.</a>\n\n"
+            f"↬ sʏsᴛᴇᴍ sᴛᴀᴛs\n\n"
+            f"↬ ᴜᴩᴛɪᴍᴇ : {uptime}\n"
+            f"↬ ʀᴀᴍ    : {ram_usage}\n"
+            f"↬ ᴄᴩᴜ    :  {cpu_usage}\n"
+            f"↬ ᴅɪsᴋ    : {disk_usage}\n"
         )
 
         await message.reply(stats_message)
