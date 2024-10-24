@@ -20,10 +20,9 @@ async def ping(client, message):
         disk = psutil.disk_usage('/')
         disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
 
-        response = f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>"
-        await message.reply(response)
-
+        # Merge the image and stats into one message
         stats_message = (
+            f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>\n\n"
             f"System Stats\n"
             f"Uptime: {uptime}\n"
             f"RAM Usage: {ram_usage}\n"
