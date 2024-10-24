@@ -3,7 +3,7 @@ import importlib
 import config 
 
 from pyrogram import idle
-from AnonXMusic import LOGGER, app, userbot
+from AnonXMusic import LOGGER, app
 from AnonXMusic.misc import sudo
 from AnonXMusic.plugins import ALL_MODULES
 from AnonXMusic.utils.database import get_banned_users, get_gbanned
