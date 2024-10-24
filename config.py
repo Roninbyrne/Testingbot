@@ -71,7 +71,7 @@ votemode = {}
 autoclean = []
 confirmer = {}
 
-START_VIDEO=getenv("START_VIDEO","https://envs.sh/IyI.mp4")
+START_VIDEO=getenv("START_VIDEO","https://envs.sh/niT.jpg")
 
 START_IMG_URL = getenv(
     "START_IMG_URL", "https://te.legra.ph/file/25efe6aa029c6baea73ea.jpg"
