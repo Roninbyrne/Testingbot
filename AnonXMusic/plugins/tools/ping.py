@@ -3,6 +3,7 @@ import psutil
 import time
 from datetime import timedelta
 import logging
+from AnonXMusic import app
 from config import PING_IMG_URL
 
 @app.on_message(filters.command(["ping", "alive"], prefixes=".") & filters.me)
