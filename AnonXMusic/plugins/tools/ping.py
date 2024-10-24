@@ -16,14 +16,14 @@ async def ping(client, message):
 
         ram = psutil.virtual_memory()
         ram_usage = f"{ram.percent}% used ({ram.used / (1024 ** 3):.2f} GB of {ram.total / (1024 ** 3):.2f} GB)"
-
         cpu_usage = f"{psutil.cpu_percent(interval=1)}%"
-
         disk = psutil.disk_usage('/')
         disk_usage = f"{disk.percent}% used ({disk.used / (1024 ** 3):.2f} GB of {disk.total / (1024 ** 3):.2f} GB)"
 
         response = f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>"
-        await message.reply(response)  # Corrected indentation
+        await message.reply(response)
+
+        await message.reply_photo(photo=PING_IMG_URL)
 
         stats_message = (
             f"System Stats\n"
@@ -33,7 +33,7 @@ async def ping(client, message):
             f"Disk Usage: {disk_usage}\n"
         )
 
-        await message.reply_caption(stats_message)
+        await message.reply(stats_message)
 
     except Exception as e:
         logging.error(f"An error occurred: {e}")
