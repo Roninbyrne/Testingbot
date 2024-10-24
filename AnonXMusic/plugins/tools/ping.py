@@ -31,7 +31,7 @@ async def ping(client, message):
             f"Disk Usage: {disk_usage}\n"
         )
 
-        await reply.edit_text(stats_message)
+        await message.reply(stats_message)  
 
         await message.reply_photo(
             photo=PING_IMG_URL,
@@ -41,4 +41,4 @@ async def ping(client, message):
     except Exception as e:
         logging.error(f"An error occurred: {e}")
         error_message = "An error occurred while retrieving system stats."
-        await message.edit_text(error_message)
+        await message.reply(error_message)
