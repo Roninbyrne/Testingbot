@@ -64,14 +64,6 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 # Checkout https://www.gbmb.org/mb-to-bytes for converting mb to bytes
 
 
-# Get your pyrogram v2 session from @StringFatherBot on Telegram
-STRING = getenv("STRING_SESSION", None)
-STRING2 = getenv("STRING_SESSION2", None)
-STRING3 = getenv("STRING_SESSION3", None)
-STRING4 = getenv("STRING_SESSION4", None)
-STRING5 = getenv("STRING_SESSION5", None)
-
-
 BANNED_USERS = filters.user()
 adminlist = {}
 lyrical = {}
@@ -79,6 +71,7 @@ votemode = {}
 autoclean = []
 confirmer = {}
 
+START_VIDEO=getenv("START_VIDEO","https://envs.sh/niT.jpg")
 
 START_IMG_URL = getenv(
     "START_IMG_URL", "https://te.legra.ph/file/25efe6aa029c6baea73ea.jpg"
