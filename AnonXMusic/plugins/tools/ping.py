@@ -23,8 +23,6 @@ async def ping(client, message):
         response = f"{client.mention} is pinging... <a href='{PING_IMG_URL}'>.</a>"
         await message.reply(response)
 
-        await message.reply_photo(photo=PING_IMG_URL)
-
         stats_message = (
             f"System Stats\n"
             f"Uptime: {uptime}\n"
