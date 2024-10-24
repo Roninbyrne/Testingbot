@@ -1,5 +1,6 @@
 import asyncio
 import importlib
+import config 
 
 from pyrogram import idle
 from AnonXMusic import LOGGER, app, userbot
