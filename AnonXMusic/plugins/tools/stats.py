@@ -5,11 +5,11 @@ import psutil
 from pyrogram import __version__ as pyrover
 from pyrogram import filters
 from pyrogram.errors import MessageIdInvalid
-from pyrogram.types import InputMediaPhoto, Message
+from pyrogram.types import InputMediaPhoto, InputMediaVideo, Message
 from pytgcalls.__version__ import __version__ as pytgver
 
 import config
-from AnonXMusic import app
+from AnonXMusic import app
 from AnonXMusic.misc import SUDOERS, mongodb
 from AnonXMusic.plugins import ALL_MODULES
 from AnonXMusic.utils.database import get_served_chats, get_served_users, get_sudoers
@@ -17,17 +17,14 @@ from AnonXMusic.utils.decorators.language import language, languageCB
 from AnonXMusic.utils.inline.stats import back_stats_buttons, stats_buttons
 from config import BANNED_USERS
 
-
 @app.on_message(filters.command(["stats", "gstats"]) & filters.group & ~BANNED_USERS)
 @language
 async def stats_global(client, message: Message, _):
     upl = stats_buttons(_, True if message.from_user.id in SUDOERS else False)
-    await message.reply_photo(
-        photo=config.STATS_IMG_URL,
-        caption=_["gstats_2"].format(app.mention),
+    await message.reply(
+        text=f'<a href="{config.STATS_IMG_URL}"> 🚩</a> {_["gstats_2"].format(app.mention)}',
         reply_markup=upl,
     )
-
 
 @app.on_callback_query(filters.regex("stats_back") & ~BANNED_USERS)
 @languageCB
@@ -37,7 +34,6 @@ async def home_stats(client, CallbackQuery, _):
         text=_["gstats_2"].format(app.mention),
         reply_markup=upl,
     )
-
 
 @app.on_callback_query(filters.regex("TopOverall") & ~BANNED_USERS)
 @languageCB
@@ -53,23 +49,14 @@ async def overall_stats(client, CallbackQuery, _):
     served_users = len(await get_served_users())
     text = _["gstats_3"].format(
         app.mention,
-        len(assistants),
         len(BANNED_USERS),
         served_chats,
         served_users,
         len(ALL_MODULES),
         len(SUDOERS),
-        config.AUTO_LEAVING_ASSISTANT,
-        config.DURATION_LIMIT_MIN,
     )
-    med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
-    try:
-        await CallbackQuery.edit_message_media(media=med, reply_markup=upl)
-    except MessageIdInvalid:
-        await CallbackQuery.message.reply_photo(
-            photo=config.STATS_IMG_URL, caption=text, reply_markup=upl
-        )
-
+    await CallbackQuery.message.delete()
+    await CallbackQuery.message.reply(text=f'<a href="{config.STATS_IMG_URL}"> 🚩</a> {text}', reply_markup=upl)
 
 @app.on_callback_query(filters.regex("bot_stats_sudo"))
 @languageCB
@@ -125,10 +112,6 @@ async def bot_stats(client, CallbackQuery, _):
         call["collections"],
         call["objects"],
     )
-    med = InputMediaPhoto(media=config.STATS_IMG_URL, caption=text)
-    try:
-        await CallbackQuery.edit_message_media(media=med, reply_markup=upl)
-    except MessageIdInvalid:
-        await CallbackQuery.message.reply_photo(
-            photo=config.STATS_IMG_URL, caption=text, reply_markup=upl
-        )
+    med = InputMediaVideo(media=config.STATS_IMG_URL, caption=text)
+    await CallbackQuery.message.delete()
+    await CallbackQuery.message.reply(text=f'<a href="{config.STATS_IMG_URL}"> 🚩</a> {text}', reply_markup=upl)
